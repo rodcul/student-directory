@@ -80,15 +80,21 @@ while !@name.empty? do
 end
 
 
-
-
-
 #return the array of students
 @students
 end
 
 def save_students
-	CSV.open("students.csv", "wb") do |csv|
+	puts "Enter file name to save to (if none is entered will use students.csv)"
+	input = gets.chomp
+	
+	if input.empty?
+		filename = "students.csv"
+	else
+		filename = input
+	end
+
+	CSV.open(filename, "wb") do |csv|
     	@students.map do |row|
     		csv << [row[:name],row[:cohort],row[:country]]
     	end  
@@ -108,13 +114,26 @@ def try_load_students
 end
 
 
-
-
-
 def load_students(filename="students.csv")
-	CSV.foreach("students.csv") do |row|
-    @students << {:name => row[0], :cohort => row[1], :country => row[2]}
-  end
+	puts "Enter file name to load (if none is entered will use students.csv)"
+	input = gets.chomp
+	
+	if input.empty?
+		filename = "students.csv"
+	else
+		filename = input
+	end
+
+
+	if File.exists?(filename) #if it exists
+		CSV.foreach(filename) do |row|
+    		@students << {:name => row[0], :cohort => row[1], :country => row[2]}
+    	end
+			puts "\nLoaded #{@students.length} from #{filename}\n"
+	else #if it doesn't exist
+		puts "Sorry, #{filename} doesn't exist."
+		# quit the program
+	end
 	
 end
 
