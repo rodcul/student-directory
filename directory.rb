@@ -8,6 +8,7 @@ def input_students
 	name = gets.chomp
 	puts "\nCohort"
 	cohort = gets.chomp
+	cohort = "April" if cohort.empty?
 	puts "\nCountry"
 	country = gets.chomp
 
@@ -22,6 +23,7 @@ while !name.empty? do
 	return students if name.empty?
 	puts "\nCohort"
 	cohort = gets.chomp
+	cohort = "April" if cohort.empty?
 	puts "\nCountry"
 	country = gets.chomp
 end
