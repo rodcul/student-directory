@@ -1,6 +1,6 @@
 def input_students
-	puts "Please enter the names of students".center(50)
-	puts "To finish, just hit return twice".center(50)
+	puts "Please enter the names of students"
+	puts "To finish, just hit return twice"
 	# create an empty array
 	students = []
 	# get the first name
@@ -16,7 +16,7 @@ def input_students
 while !name.empty? do
 	#add the student hash to the array
 	students << {:name => name, :cohort => cohort, :country => country}
-	puts "Now we have #{students.length} students"
+	puts "Now we have #{students.length} #{students == 1 ? "student" : "students"}"
 	# get another name from the user
 	puts "Name"
 	name = gets.chomp
@@ -34,21 +34,21 @@ end
 
 
 def print_header
-  puts "The students of my cohort at Makers Academy".center(50)
+  puts "The students of my cohort at Makers Academy"
   puts "".center(50,"-")
 end
 
 def print(students)
-  students.each_with_index() do |student,index|
-     puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort from #{student[:country]})".center(50)
+
+  students.map do |student|
+     puts "#{student[:name]} (#{student[:cohort]} cohort from #{student[:country]})"
 
   end
 end
 
 def print_footer(names)
-  puts "Overall, we have #{names.length} great students".center(50)
+  puts "\nOverall, we have #{names.length} great students"
 end 
-
 
 #nothing happens until we call the methods
 students = input_students
