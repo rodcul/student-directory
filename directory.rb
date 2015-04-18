@@ -6,6 +6,7 @@ def input_students
 	# get the first name
 	puts "Name"
 	name = gets.delete "/\n/"
+	return students if name.empty?
 	puts "\nCohort"
 	cohort = gets.delete "/\n/"
 	cohort = "April" if cohort.empty?
@@ -39,10 +40,9 @@ def print_header
 end
 
 def print(students)
-
-  students.map do |student|
-     puts "#{student[:name]} (#{student[:cohort]} cohort from #{student[:country]})"
-
+	return puts "No students at this time" if students.empty?
+  	students.map do |student|
+    	puts "#{student[:name]} (#{student[:cohort]} cohort from #{student[:country]})"
   end
 end
 
