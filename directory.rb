@@ -48,36 +48,37 @@ def show_students
 	print_footer
 end
 
+def student_questions
+	puts "Name"
+	@name = STDIN.gets.delete "/\n/"
+	return @students if @name.empty?
+	puts "\nCohort"
+	@cohort = STDIN.gets.delete "/\n/"
+	@cohort = "April" if @cohort.empty?
+	puts "\nCountry"
+	@country = STDIN.gets.delete "/\n/"
+end
+
 def input_students
 	puts "Please enter the names of students"
 	puts "To finish, just hit return twice"
 	# create an empty array
 	students = []
 	# get the first name
-	puts "Name"
-	name = STDIN.gets.delete "/\n/"
-	return @students if name.empty?
-	puts "\nCohort"
-	cohort = STDIN.gets.delete "/\n/"
-	cohort = "April" if cohort.empty?
-	puts "\nCountry"
-	country = STDIN.gets.delete "/\n/"
+	student_questions
 
 	# while the name is not empty, repeat this code
-while !name.empty? do
+while !@name.empty? do
 	#add the student hash to the array
-	@students << {:name => name, :cohort => cohort, :country => country}
+	@students << {:name => @name, :cohort => @cohort, :country => @country}
 	puts "Now we have #{@students.length} #{@students == 1 ? "student" : "students"}"
 	# get another name from the user
-	puts "Name"
-	name = STDIN.gets.delete "/\n/"
-	return @students if name.empty?
-	puts "\nCohort"
-	cohort = STDIN.gets.delete "/\n/"
-	cohort = "April" if cohort.empty?
-	puts "\nCountry"
-	country = STDIN.gets.delete "/\n/"
+	student_questions
 end
+
+
+
+
 
 #return the array of students
 @students
