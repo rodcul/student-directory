@@ -5,12 +5,12 @@ def input_students
 	students = []
 	# get the first name
 	puts "Name"
-	name = gets.chomp
+	name = gets.delete "/\n/"
 	puts "\nCohort"
-	cohort = gets.chomp
+	cohort = gets.delete "/\n/"
 	cohort = "April" if cohort.empty?
 	puts "\nCountry"
-	country = gets.chomp
+	country = gets.delete "/\n/"
 
 	# while the name is not empty, repeat this code
 while !name.empty? do
@@ -19,13 +19,13 @@ while !name.empty? do
 	puts "Now we have #{students.length} #{students == 1 ? "student" : "students"}"
 	# get another name from the user
 	puts "Name"
-	name = gets.chomp
+	name = gets.delete "/\n/"
 	return students if name.empty?
 	puts "\nCohort"
-	cohort = gets.chomp
+	cohort = gets.delete "/\n/"
 	cohort = "April" if cohort.empty?
 	puts "\nCountry"
-	country = gets.chomp
+	country = gets.delete "/\n/"
 end
 
 #return the array of students
