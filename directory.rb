@@ -1,6 +1,6 @@
 def input_students
-	puts "Please enter the names of students"
-	puts "To finish, just hit return twice"
+	puts "Please enter the names of students".center(50)
+	puts "To finish, just hit return twice".center(50)
 	# create an empty array
 	students = []
 	# get the first name
@@ -32,19 +32,19 @@ end
 
 
 def print_header
-  puts "The students of my cohort at Makers Academy"
-  puts "-------------"
+  puts "The students of my cohort at Makers Academy".center(50)
+  puts "".center(50,"-")
 end
 
 def print(students)
   students.each_with_index() do |student,index|
-     puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort from #{student[:country]})"
+     puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort from #{student[:country]})".center(50)
 
   end
 end
 
 def print_footer(names)
-  puts "\nOverall, we have #{names.length} great students"
+  puts "Overall, we have #{names.length} great students".center(50)
 end 
 
 
