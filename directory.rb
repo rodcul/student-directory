@@ -4,10 +4,10 @@ def interactive_menu
 
   loop do
     # 1. print the menu and ask the user what to do
-	 print_menu   
+	print_menu   
 
     # 2. read the input and save it into a variable
-    process(gets.chomp)
+    process(STDIN.gets.chomp)
     
     # 3. do what the user has asked
 	end
@@ -55,13 +55,13 @@ def input_students
 	students = []
 	# get the first name
 	puts "Name"
-	name = gets.delete "/\n/"
+	name = STDIN.gets.delete "/\n/"
 	return @students if name.empty?
 	puts "\nCohort"
-	cohort = gets.delete "/\n/"
+	cohort = STDIN.gets.delete "/\n/"
 	cohort = "April" if cohort.empty?
 	puts "\nCountry"
-	country = gets.delete "/\n/"
+	country = STDIN.gets.delete "/\n/"
 
 	# while the name is not empty, repeat this code
 while !name.empty? do
@@ -70,13 +70,13 @@ while !name.empty? do
 	puts "Now we have #{@students.length} #{@students == 1 ? "student" : "students"}"
 	# get another name from the user
 	puts "Name"
-	name = gets.delete "/\n/"
+	name = STDIN.gets.delete "/\n/"
 	return @students if name.empty?
 	puts "\nCohort"
-	cohort = gets.delete "/\n/"
+	cohort = STDIN.gets.delete "/\n/"
 	cohort = "April" if cohort.empty?
 	puts "\nCountry"
-	country = gets.delete "/\n/"
+	country = STDIN.gets.delete "/\n/"
 end
 
 #return the array of students
@@ -97,8 +97,24 @@ def save_students
 	file.close	
 end
 
-def load_students
-	file = File.open("students.csv", "r")
+def try_load_students
+	filename = ARGV.first # first argument from the command line
+	return if filename.nil? #get out of the method if no filename was provided
+	if File.exists?(filename) #if it exists
+		load_students(filename)
+		puts "Loaded #{@students}.length from #{filename}"
+	else #if it doesn't exist
+		puts "Sorry, #{filename} doesn't exist."
+		exit # quit the program
+	end
+end
+
+
+
+
+
+def load_students(filename="students.csv")
+	file = File.open(filename, "r")
 	file.readlines.each do |line|
 		name, cohort, country = line.chomp.split(',')
 		@students << {:name => name, :cohort => cohort.to_sym, :country => country}
@@ -125,4 +141,6 @@ def print_footer
 end 
 
 #nothing happens until we call the methods
+
+try_load_students
 interactive_menu
